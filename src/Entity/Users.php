@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,9 +23,9 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Email(message = "Veuillez inserez un email valide SVP...!")
+     * @name(message = "Veuillez inserez un name valide SVP...!")
      */
-    private $userEmail;
+    private $username;
 
     /**
      * @ORM\Column(type="json")
@@ -65,14 +64,9 @@ class Users implements UserInterface
         return $this->id;
     }
 
-    public function getUserEmail(): ?string
+    public function setUsername(string $username): self
     {
-        return $this->userEmail;
-    }
-
-    public function setUserEmail(string $userEmail): self
-    {
-        $this->userEmail = $userEmail;
+        $this->username = $username;
 
         return $this;
     }
@@ -84,7 +78,7 @@ class Users implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->userEmail;
+        return (string) $this->username;
     }
 
     /**
