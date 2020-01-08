@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -16,14 +17,14 @@ class Users implements UserInterface
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @name(message = "Veuillez inserez un name valide SVP...!")
+     * @Email(message = "Veuillez inserez un email valide SVP...!")
      */
     private $username;
 
@@ -40,6 +41,7 @@ class Users implements UserInterface
      */
     private $password;
 
+    
     /**
      * @ORM\Column(type="string", length=255)
      * @NotBlank(message="Veuillez inserez votre prenom SVP...!")
@@ -115,6 +117,8 @@ class Users implements UserInterface
         return $this;
     }
 
+    
+
     /**
      * @see UserInterface
      */
@@ -128,8 +132,7 @@ class Users implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getUserFisrtName(): ?string
