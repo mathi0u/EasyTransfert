@@ -35,7 +35,7 @@ class UsersFixtures extends Fixture
         { 
             $admin = new Users();
             $admin->setUsername("admin{$i}@et.et");
-            $admin->setRoles(["ADMIN"]);
+            $admin->setRoles(["ROLE_ADMIN"]);
             $admin->setUserFisrtName("admin{$i}");
             $admin->setUserLastName("ad{$i}");
             $admin->setUserStatut(true);
@@ -49,7 +49,7 @@ class UsersFixtures extends Fixture
         { 
             $cashier = new Users();
             $cashier->setUsername("cashier{$i}@et.et");
-            $cashier->setRoles(["CASHIER"]);
+            $cashier->setRoles(["ROLE_CASHIER"]);
             $cashier->setUserFisrtName("cashier{$i}");
             $cashier->setUserLastName("ca{$i}");
             $cashier->setUserStatut(true);

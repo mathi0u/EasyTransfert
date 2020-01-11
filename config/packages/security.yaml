@@ -10,6 +10,9 @@ security:
             entity:
                 class: App\Entity\Users
                 property: username
+    role_hierarchy:    
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN: ROLE_CASHIER
     
     firewalls:
         dev:
@@ -25,16 +28,17 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-        # api:
-        #     pattern:  ^/api
-        #     stateless: true
-        #     anonymous: false
-        #     provider: app_user_provider
-        #     guard:
-        #         authenticators:
-        #             - lexik_jwt_authentication.jwt_token_authenticator
+        api:
+            pattern:  ^/api
+            stateless: true
+            anonymous: false
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+            user_checker: App\Security\UserChecker
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY  }
-        - { path: ^/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/api, roles: IS_AUTHENTICATED_FULLY  }
+        # - { path: ^/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY  }

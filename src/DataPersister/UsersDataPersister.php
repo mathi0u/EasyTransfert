@@ -33,6 +33,7 @@ class UsersDataPersister implements DataPersisterInterface
       }
       $this->manager->persist($data);
       $this->manager->flush();
+
     }
 
     public function remove($data, array $context = [])
